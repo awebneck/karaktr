@@ -1,9 +1,13 @@
-(ns karaktr.core)
+(ns karaktr.core
+  [:require [compojure.core :refer :all]
+            [compojure.route :as route]
+            [karaktr.actions [site :as a-site]]])
 
-;;; This is an incorrect implementation, such as might be written by
-;;; someone who was used to a Lisp in which an empty list is equal to
-;;; nil.
-(defn first-element [sequence default]
-  (if (nil? sequence)
-    default
-    (first sequence)))
+(defroutes resources-routes
+  (route/resources "/resources/"))
+
+(defroutes app-routes
+  (GET "/" [] (a-site/home)))
+
+(def app
+  (routes resources-routes app-routes))

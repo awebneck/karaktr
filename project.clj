@@ -4,7 +4,9 @@
                  [compojure "1.1.6"]
                  [com.datomic/datomic-pro "0.9.4699"]
                  [environ "0.4.0"]
-                 [hiccup "1.0.5"]]
+                 [hiccup "1.0.5"]
+                 [crypto-random "1.2.0"]
+                 [crypto-password "0.1.3"]]
   :profiles {:dev {:dependencies [[midje "1.5.1"]]
                    :env {:datomic-uri "datomic:dev://localhost:4334/karaktr"}
                    :datomic {:db-uri "datomic:dev://localhost:4334/karaktr"}}}

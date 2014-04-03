@@ -10,16 +10,9 @@
 
   {:db/id #db/id[:db.part/db]
    :db/ident :user/encrypted-password
-   :db/valueType :db.type/bytes
+   :db/valueType :db.type/string
    :db/cardinality :db.cardinality/one
    :db/doc "A user's password hash"
-   :db.install/_attribute :db.part/db}
-
-  {:db/id #db/id[:db.part/db]
-   :db/ident :user/password-salt
-   :db/valueType :db.type/bytes
-   :db/cardinality :db.cardinality/one
-   :db/doc "Salt for the user's password hash"
    :db.install/_attribute :db.part/db}
 
   {:db/id #db/id[:db.part/db]

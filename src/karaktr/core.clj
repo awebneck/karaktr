@@ -11,7 +11,7 @@
   (route/resources "/resources/"))
 
 (defroutes app-routes
-  (GET "/" [] (a-site/home))
+  (GET "/" [x :as {session :session}] (a-site/home))
 
   ; User session routes
   (GET "/user-sessions/new" [] (a-sessions/neu))
@@ -19,14 +19,13 @@
 
   ; User routes
   (GET "/users/new" [] (a-users/neu))
-  (POST "/users" [] (a-users/create)))
+  (POST "/users" [user :as {sess :session}] (a-users/create user sess)))
 
 (defroutes api-routes
-  (GET "/users" [] "smeggit!!!"))
+  (GET "/api/v1/users" [] "smeggit!!!"))
 
-(defn app
-  [request]
-  (case (second (strng/split (:uri request) #"/"))
-    "api" ((handler/api api-routes) (assoc request :uri (strng/replace (:uri request) #"/api/v\d" "")))
-    "resources" ((handler/site resources-routes) request)
-    ((handler/site app-routes) request)))
+(def all-routes
+  (routes app-routes resources-routes api-routes))
+
+(def app
+  (handler/site all-routes))

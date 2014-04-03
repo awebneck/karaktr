@@ -33,5 +33,5 @@
 (defn create-user
   [attrs]
   (if (valid? creation-battery attrs)
-    (do (pers/transact attrs) attrs)
+    (pers/create attrs)
     (assoc attrs :errors (creation-battery attrs))))

@@ -18,10 +18,10 @@
     (assoc attrs :encrypted-password (passw/encrypt (:password attrs)))
     attrs))
 
-(defn transact
+(defn create
   [attrs]
-  (let [conn (d/connect (:uri datomic-config))]
-    @(d/transact conn
-                         [(map-attrs (-> attrs (set-id) (encrypt-password))
-                                    attr-ent-keymap)
-             ])))
+  (let [attrs (-> attrs (set-id) (encrypt-password))
+        conn (d/connect (:uri datomic-config))
+        trans @(d/transact conn [(map-attrs attrs attr-ent-keymap)])
+        permid (d/resolve-tempid (d/db conn) (:tempids trans) (:id attrs))]
+    (assoc attrs :id permid)))

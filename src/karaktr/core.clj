@@ -4,22 +4,15 @@
                        [handler :as handler]]
             [clojure [string :as strng]]
             [karaktr.actions [site :as a-site]
-                             [sessions :as a-sessions]
                              [users :as a-users]]])
 
 (defroutes resources-routes
   (route/resources "/resources/"))
 
 (defroutes app-routes
-  (GET "/" [x :as {session :session}] (a-site/home))
-
-  ; User session routes
-  (GET "/user-sessions/new" [] (a-sessions/neu))
-  (POST "/user-sessions" [] (a-sessions/create))
-
-  ; User routes
+  (GET "/" [] (a-site/home))
   (GET "/users/new" [] (a-users/neu))
-  (POST "/users" [user :as {sess :session}] (a-users/create user sess)))
+  (POST "/users" [email] (a-users/create email)))
 
 (defroutes api-routes
   (GET "/api/v1/users" [] "smeggit!!!"))

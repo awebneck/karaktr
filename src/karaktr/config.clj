@@ -1,5 +1,6 @@
-(ns karaktr.config
-  [:require [environ.core :refer :all]])
+(ns karaktr.config)
 
-(def datomic-config
-  {:uri (env :datomic-uri)})
+(def config (read-string (slurp "resources/config.clj")))
+
+(defn datomic-uri
+  ((config :datomic) :uri))

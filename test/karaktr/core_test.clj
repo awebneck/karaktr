@@ -2,7 +2,9 @@
   (:use midje.sweet)
   (:use [karaktr.core]))
 
-(println "You sbould expect to see three failures below.")
+(facts "about resources-routes"
+  (fact "it should route requests to /resources/* to the /resources/public directory"
+    (resources-routes {:request-method :get :uri "/resources/test/porkus.js"}) => (contains {:status 200})))
 
 ; (facts "about `first-element`"
 ;   (fact "it normally returns the first element"

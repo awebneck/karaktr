@@ -4,4 +4,4 @@
 
 (defn home
   []
-  (layouts/application (tmpl/home "Gaslight")))
+  (layouts/application (tmpl/home)))
